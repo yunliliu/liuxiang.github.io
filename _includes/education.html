@@ -1,0 +1,44 @@
+ <!-- {% assign theme = site.data.themes[site.ui_theme] %}
+  <h5 class="card-title" style="font-family:{{ theme.education-title-font}};font-size:{{ theme.education-title-size }};color:{{theme.education-font-color}};">Education & Certifications</h5>
+  <ul class="list-unstyled">
+  {% for entry in site.data.education %}
+    <li class="media">
+      <img src="{{ entry.Icon }}" class="mr-3" alt="...">
+      <div class="media-body">
+        <h5 style="font-family:{{ theme.education-entry-font}};font-size:{{ theme.education-entry-size }};color:{{theme.education-font-color}};">{{ entry.School }}</h5>
+        <p style="font-family:{{ theme.education-entry-font}};font-size:{{ theme.education-section-size }};color:{{theme.education-font-color}};"><i>{{ entry.Program }}</i></p>
+        {% if entry.Degree %}
+          <p>{{ entry.Degree }}</p>
+        {% endif %}
+      </div>
+    </li>
+    {% endfor %}
+  </ul> -->
+  <!-- {% assign theme = site.data.themes[site.ui_theme] %}
+  <div class="card">
+    <div class="card-header" style="background-color: {{ theme.education-header-bg-color }};">
+      <h5 class="card-title" style="font-family:{{ theme.education-title-font}};font-size:{{ theme.education-title-size }};color:{{theme.education-font-color}};">Education & Certifications</h5>
+    </div>
+    <div class="card-body" style="font-family:{{ theme.education-entry-font}};font-size:{{ theme.education-entry-size }};color:{{theme.education-font-color}};">
+      {% for entry in site.data.education %}
+        <div class="row mb-4">
+          <div class="col-md-3">
+            <img src="{{ entry.Icon }}" class="img-fluid" alt="...">
+          </div>
+          <div class="col-md-9">
+            <h5 class="card-title">{{ entry.School }}</h5>
+            <p class="card-text"><i>{{ entry.Program }}</i></p>
+            {% if entry.Degree %}
+              <p class="card-text">{{ entry.Degree }}</p>
+            {% endif %}
+            {% if entry.StartDate %}
+              <p class="card-text"><small class="text-muted">Start Date: {{ entry.StartDate }}</small></p>
+            {% endif %}
+            {% if entry.EndDate %}
+              <p class="card-text"><small class="text-muted">End Date: {{ entry.EndDate }}</small></p>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div> -->

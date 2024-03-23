@@ -1,0 +1,348 @@
+---
+layout: default
+---
+{% assign theme = site.data.themes[site.ui_theme] %}
+
+<!--  HELP TIPS SECTION  -->
+<!-- used only for develop mode, disable these in _config.yml with `help_tips: false` -->
+{% if site.help_tips %}
+<div class="toast animate__animated animate__pulse animate__infinite" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false" data-delay="10000" style="position: absolute; top: 10px; right: 10px;z-index: 10000;">
+  <div class="toast-header">
+    <img src="/assets/img/icons/mstile-150x150.png" class="rounded mr-2" alt="...">
+    <strong class="mr-auto">Tyler Butler</strong>
+    <small class="text-muted">11 mins ago</small>
+    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="toast-body">
+    Thanks for checking out Jekyll-Theme-Dumbarton ! This theme was developed by <a href="https://twitter.com/tbutler0x90">Tyler Butler</a>. If you're interested in using this in your own website, checkout the project on <a href="https://github.com/tcbutler320/Jekyll-Theme-Dumbarton">Github</a>
+  </div>
+</div>
+{% endif %}
+
+<!-- ABOUT ME SECTION -->
+<div class="card profile-card mx-auto">
+  <div class="row">
+    <div class="col-md-4">
+      {% if site.animate %}
+        <img src="{{ site.profile_image }}" class="img-thumbnail profile-image animated" alt="...">
+      {% else %}
+        <img src="{{ site.profile_image }}" class="img-thumbnail profile-image" alt="...">
+      {% endif %}
+
+      <!-- CONTACT DETAILS SECTION directly under the image -->
+      <div class="contact-details mt-3">
+        <p><strong>Email:</strong> {{ site.email }}</p>
+        <p><strong>Phone:</strong> {{ site.phonenumber }}</p>
+        <!-- Add more details as needed -->
+      </div>
+    </div>
+
+    <!-- EDUCATION SECTION -->
+    <div class="col-md-8 education-section">
+      {% if site.animate %}
+      <div class="card-body animated" style="--education-font-color: {{theme.education-font-color}};">
+      {% else %}
+      <div class="card-body mt-0" style="--education-font-color: {{theme.education-font-color}};">
+      {% endif %}
+        <p>{{ content | markdownify }}</p>
+        {% if site.home_option == "education" %}
+          {% include education.html %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- style="font-family:{{ theme.link-font }};background-color:{{ theme.nav-color }}; -->
+
+<!-- HOME HIGHLIGHTS SECTION --> 
+{% if site.animate %}
+<div class="card mx-auto animate__animated animate__slideInUp animate__delay-1s glowing-border" style="max-width: 100%;">
+{% else %}
+<div class="card mx-auto mb-1 border-0"  style="max-width: 100%;">
+{% endif %}
+  <div class="card-header" style="background-color:{{ theme.home-highlight-background }};">
+    <ul class="nav nav-tabs card-header-tabs" id="test-list" role="tablist">
+      {% for section in site.data.sections %}
+        {% if section.first %}
+          <li class="nav-item">
+            <a class="nav-link shadow-none" id="{{ section.jsid }}" href="#{{section.id}}" role="tab" aria-controls="{{section.id}}" aria-selected="true" style="font-family:{{ theme.font}};color:{{ theme.home-highlight-header-text}};">{{section.emoji}} {{section.name}}</a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+              <a class="nav-link" id="{{ section.jsid }}" href="#{{section.id}}" role="tab" aria-controls="{{section.id}}" aria-selected="true" style="font-family:{{ theme.font}};color:{{ theme.home-highlight-header-text}};">{{section.emoji}} {{section.name}}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="card-body">          
+      <div class="tab-content mt-3">
+        {% for section in site.data.sections %}
+          {% if section.first %}
+            {% if section.name == "Publications" %}
+              <div class="tab-pane active overflow-auto" id="{{section.id}}" role="tabpanel">
+                <p><i>{{section.description}}</i></p>
+                <p class="card-text">{% bibliography -f papers %}</p>
+              </div>
+            {% else %}
+              <div class="tab-pane overflow-auto" id="{{section.id}}" role="tabpanel">
+                <p class="card-text">{{section.description}}</p>
+              </div>
+            {% endif %}
+          {% else %}  
+            {% if section.name == "Presentations" %}
+              <div class="tab-pane overflow-auto" id="{{section.id}}" role="tabpanel" aria-labelledby="{{section.id}}-tab">  
+                <p><i>{{section.description}}</i></p>
+                <p class="card-text">{% bibliography -f presentations %}</p>              
+              </div>
+            {% elsif section.name == "Projects" %}
+              <div class="tab-pane overflow-auto" id="{{section.id}}" role="tabpanel" aria-labelledby="{{section.id}}-tab">  
+                <p><i>{{section.description}}</i></p>
+                  {% for projects in site.data.projects %}
+                  <div class="media mt-2">
+                    <a href="{{ projects.link }}"><img src="{{ projects.image }}" class="mr-3 mb-2 img-thumbnail border-0" alt="..."></a>
+                    <div class="media-body">
+                      <h5 class="mt-0"><a href="{{ projects.link }}" class="highlighted">{{ projects.name }}</a></h5>
+                      {{ projects.description }}
+                      {% if projects.tech %}
+                        <h6><mark><u>Technologies</u></mark></h6>
+                        {% for tech in projects.tech %}
+                        <span class="badge badge-secondary mr-1" style="background-color:{{ theme.projects-color }};">{{ tech }}</span>
+                        {% endfor %}
+                      {% endif %}
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>        
+              </div>
+            {% elsif section.name == "Services" %}
+              <div class="tab-pane overflow-auto p-4" id="{{section.id}}" role="tabpanel" aria-labelledby="{{section.id}}-tab">  
+                  <!-- <h3 class="text-center mb-4">Academic Services</h3> -->
+                  {% for service in site.data.services %}
+                  <div class="list-group mb-3 shadow">
+                      <div class="list-group-item list-group-item-action">
+                          <div class="d-flex w-100 justify-content-between align-items-center">
+                              <h5 class="mb-1">{{ service.Role }}</h5>
+                              {% if service.Type == 'Journal' %}
+                              <span class="badge badge-primary ml-2">{{ service.Type }}</span>
+                              {% else %}
+                              <span class="badge badge-success ml-2">{{ service.Type }}</span>
+                              {% endif %}
+                          </div>
+                          <h6 class="mt-2">{{ service.ConferenceOrJournalName }}</h6>
+                      </div>
+                  </div>
+                  {% endfor %}
+              </div>
+              
+              
+              {% elsif section.name == "Education" %}
+              <div class="tab-pane" id="{{section.id}}" role="tabpanel" aria-labelledby="{{section.id}}-tab">
+                <p class="mb-4" style="font-family: 'Noto Sans JP', sans-serif; font-size: 20px;"><i>{{section.description}}</i></p>
+                <div class="list-group">
+                    {% for entry in site.data.education %}
+                        <div class="education-entry">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <img src="{{ entry.Icon }}" class="img-fluid" alt="Icon for {{ entry.School }}">
+                                </div>
+                                <div class="col-md-9">
+                                    <h5>{{ entry.School }}</h5>
+                                    <p><i>{{ entry.Program }}</i></p>
+                                    {% if entry.Degree %}<p>{{ entry.Degree }}</p>{% endif %}
+                                    {% if entry.Supervisor %}<p>Supervisor: {{ entry.Supervisor }}</p>{% endif %}
+                                    {% if entry.StartDate %}<p class="text-muted"><i class="fas fa-calendar-alt"></i> Start: {{ entry.StartDate }}</p>{% endif %}
+                                    {% if entry.EndDate %}<p class="text-muted"><i class="fas fa-calendar-check"></i> End: {{ entry.EndDate }}</p>{% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+              </div>
+             {% else %}
+            
+              <div class="tab-pane overflow-auto" id="{{section.id}}" role="tabpanel" aria-labelledby="{{section.id}}-tab">  
+                <h5 class="card-title text-center"><a href="/{{ section.url }}" class="highlighted">{{section.description}}</a></h5>
+                <p class="card-text">{{ section.content }} </p>              
+              </div>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
+  </div>
+</div>
+
+
+
+<!-- ANIMATE.JS ANIMATE LIBRARY
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q==" crossorigin="anonymous"></script>
+-->
+
+
+<!--JS FUNCTION FOR RECENT WORK SECTION -->
+<script>
+    $('#test-list a').on('click', function (e) {
+    e.preventDefault()
+    $(this).tab('show')
+    })
+</script> 
+
+<!-- OPTIONAL TOAST JS FUNCTION-->
+<script>
+    $(document).ready(function() {
+        $(".toast").toast("show");
+    });
+</script>
+
+
+<script>
+$('body').scrollspy({ target: '#list-example' })
+</script>
+
+<script>
+$('.collapse').collapse()
+</script>
+
+<script>
+$('.show').show()
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+  /* General Styles */
+  body {
+      font-family: 'Poppins', sans-serif;
+      color: Black;
+  }
+
+  a {
+      font-family: 'Poppins', sans-serif;
+      color: #272343;
+      text-decoration: none;
+  }
+
+  a:hover {
+      text-decoration: underline;
+  }
+
+  /* Education Block Styles */
+  .education-entry {
+      position: relative;
+      padding-left: 40px;
+      margin-bottom: 50px;
+      border-left: 2px solid #149f98;
+      animation: fadeIn 1s ease-in;
+  }
+
+  .education-entry:before {
+      content: '';
+      position: absolute;
+      left: -12px;
+      top: 10px;  /* Adjusted to align with the text */
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: #149f98;
+  }
+
+  .education-entry img {
+      border-radius: 50%;
+      margin-bottom: 15px;
+      width: 180px;  /* Adjusted size */
+      height: 180px; /* Adjusted size */
+  }
+
+  .education-entry h5 {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 20px;  /* Adjusted size */
+      font-weight: 600;
+      color: #149f98;
+      margin-bottom: 12px;  /* Adjusted spacing */
+  }
+
+  .education-entry p {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 16px;  /* Adjusted size */
+      margin: 0;
+      margin-bottom: 10px;  /* Adjusted spacing */
+  }
+
+  .education-entry .text-muted {
+      font-size: 15px;  /* Adjusted size */
+  }
+
+  @keyframes fadeIn {
+      from {
+          opacity: 0;
+          transform: translateY(20px);
+      }
+      to {
+          opacity: 1;
+          transform: translateY(0);
+      }
+  }
+</style>
+
+<style>
+    .card {
+    &.profile-card {
+      margin: auto;
+      border: none;
+      position: relative;
+      background-color: var(--home-bg-color);
+
+      .img-thumbnail {
+        &.profile-image {
+          /* width: 400px;
+          height: 500px; */
+          float: left;
+          border-radius: 20%;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        &.animated {
+          animation-name: fadeInLeft;
+          animation-duration: 1s;
+        }
+      }
+
+      .additional-info {
+        h4 {
+          margin-top: 1rem;
+        }
+
+        ul {
+          list-style-type: none;
+          padding-left: 0;
+
+          li {
+            margin-bottom: 0.5rem;
+          }
+        }
+      }
+
+      .education-section {
+        .card-body {
+          color: var(--education-font-color);
+
+          &.animated {
+            animation-name: fadeInRight;
+            animation-duration: 1s;
+          }
+
+          p {
+            margin-top: 0;
+          }
+        }
+      }
+    }
+  }
+</style>

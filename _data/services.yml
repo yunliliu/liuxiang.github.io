@@ -1,0 +1,17 @@
+- Role: "Reviewer"
+  Type: "Journal"
+  ConferenceOrJournalName: "IEEE Transactions on Cloud Computing"
+
+- Role: "Reviewer"
+  Type: "Journal"
+  ConferenceOrJournalName: "IEEE Transactions on Mobile Computing"
+
+- Role: "Reviewer"
+  Type: "Conference"
+  ConferenceOrJournalName: "IEEE International Conference on Communications (2022, 2023)"
+
+- Role: "Reviewer"
+  Type: "Conference"
+  ConferenceOrJournalName: "The 5th ACM International Symposium on Blockchain and Secure Critical Infrastructure (2022)" 
+
+

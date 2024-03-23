@@ -1,0 +1,23 @@
+- School: The Chinese University of Hong Kong, Shenzhen
+  Degree: M.Phil 
+  Program: Computer and Information Engineering
+  StartDate: 2021-10
+  EndDate: 2023-10
+  Icon: /assets/img/icons/cusz.png      # Make this icon small, think 30px/30px
+  Supervisor: Prof. Wei Cai
+
+- School: University of Electronic Science and Technology of China
+  Degree: B.Eng 
+  Program: Electronic Information Engineering
+  StartDate: 2017-09
+  EndDate: 2021-07
+  Icon: /assets/img/icons/uestc.png     # Make this icon small, think 30px/30px
+  Supervisor: Prof. Chunbo Luo
+
+- School: University of Glasgow
+  Degree: B.Eng with Honours of the First Class
+  Program: Elctrical and Electronic Engineering
+  StartDate: 2017-09
+  EndDate: 2021-07
+  Icon: /assets/img/icons/uofg.png     # Make this icon small, think 30px/30px
+  Supervisor: Prof. Lei Zhang

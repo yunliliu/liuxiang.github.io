@@ -1,0 +1,106 @@
+---
+layout: page
+permalink: /education.html
+title: Education
+---
+
+<div class="tab-pane" id="{{section.id}}" role="tabpanel" aria-labelledby="{{section.id}}-tab">
+    <p class="mb-4" style="font-family: 'Noto Sans JP', sans-serif; font-size: 20px;"><i>{{section.description}}</i></p>
+    <div class="list-group">
+        {% for entry in site.data.education %}
+            <div class="education-entry">
+                <div class="row">
+                    <div class="col-md-3">
+                        <img src="{{ entry.Icon }}" class="img-fluid" alt="Icon for {{ entry.School }}">
+                    </div>
+                    <div class="col-md-9">
+                        <h5>{{ entry.School }}</h5>
+                        <p><i>{{ entry.Program }}</i></p>
+                        {% if entry.Degree %}<p>{{ entry.Degree }}</p>{% endif %}
+                        {% if entry.StartDate %}<p class="text-muted">Start Date: {{ entry.StartDate }}</p>{% endif %}
+                        {% if entry.EndDate %}<p class="text-muted">End Date: {{ entry.EndDate }}</p>{% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+  
+    /* General Styles */
+    body {
+        font-family: 'Poppins', sans-serif;
+        color: Black;
+    }
+  
+    a {
+        font-family: 'Poppins', sans-serif;
+        color: #272343;
+        text-decoration: none;
+    }
+  
+    a:hover {
+        text-decoration: underline;
+    }
+  
+    /* Education Block Styles */
+    .education-entry {
+        position: relative;
+        padding-left: 40px;
+        margin-bottom: 50px;
+        border-left: 2px solid #149f98;
+        animation: fadeIn 1s ease-in;
+    }
+  
+    .education-entry:before {
+        content: '';
+        position: absolute;
+        left: -12px;
+        top: 10px;  /* Adjusted to align with the text */
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: #149f98;
+    }
+  
+    .education-entry img {
+        border-radius: 50%;
+        margin-bottom: 15px;
+        width: 180px;  /* Adjusted size */
+        height: 180px; /* Adjusted size */
+    }
+  
+    .education-entry h5 {
+        font-family: 'Noto Sans JP', sans-serif;
+        font-size: 20px;  /* Adjusted size */
+        font-weight: 600;
+        color: #149f98;
+        margin-bottom: 12px;  /* Adjusted spacing */
+    }
+  
+    .education-entry p {
+        font-family: 'Noto Sans JP', sans-serif;
+        font-size: 16px;  /* Adjusted size */
+        margin: 0;
+        margin-bottom: 10px;  /* Adjusted spacing */
+    }
+  
+    .education-entry .text-muted {
+        font-size: 15px;  /* Adjusted size */
+    }
+  
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+  </style>
+  
